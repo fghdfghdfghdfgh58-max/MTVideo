@@ -34,7 +34,7 @@ async function session(res,uid,out){const t=crypto.randomBytes(32).toString('hex
 const hashPw=(pw,salt)=>crypto.scryptSync(pw,salt,64).toString('hex');
 async function state(){const now=Date.now();return{
  channels:await all('SELECT id,name,owner,ts FROM channels'),
- videos:await all('SELECT id,title,type,ch_id AS "chId",owner,'/media/'||file AS url,dur,ts FROM videos ORDER BY ts DESC LIMIT 500'),
+videos: await all("SELECT id,title,type,ch_id AS \"chId\",owner,'/media/'||file AS url,dur,ts FROM videos ORDER BY ts DESC LIMIT 500"),
  reacts:await all('SELECT video_id AS v,user_id AS uid,val FROM reacts'),
  comments:await all('SELECT id,video_id AS v,user_id AS uid,name,text,ts FROM comments ORDER BY ts DESC LIMIT 1000'),
  subs:await all("SELECT channel_id||'_'||user_id AS id,channel_id AS ch,user_id AS uid FROM subs"),
